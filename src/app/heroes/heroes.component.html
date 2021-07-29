@@ -1,0 +1,22 @@
+<div class="search">
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+    <label for="hero-name">Enter Your Hero's Name (Required): </label>
+    <input type="text" id="hero-name" formControlName="heroName">
+
+    <div *ngIf="!heroForm.valid && heroForm.touched" style="color:red;">
+      Hero name is required.
+    </div>
+    <div *ngIf="!heroIsValid && heroForm.touched" style="color:red;">
+      Hero name must be at least 5 characters long!
+    </div>
+    <button [disabled]="!heroForm.valid">Add New Hero</button>
+  </form>
+</div>
+
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <span class="badge" style="background-color:#502D7F; color: white;">{{ hero.id || -1 }}</span>
+    <span style="background-color:#DEDCFF; padding:5px;">{{formatHeroName(hero)}}</span>
+    <button class="delete" style="background-color:#7764BE" title="delete hero" (click)="delete(hero)">x</button>
+  </li>
+</ul>
